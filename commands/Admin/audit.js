@@ -43,7 +43,7 @@ async function messageDelete(message) {
 
     var guild = guilds[bot.guilds.find(e => e.id == message.guild.id).id]
 
-    var tmp = Object.assign({}, data);
+    var tmp = {...data };
 
     const entry = await message.guild.fetchAuditLogs({ type: 'MESSAGE_DELETE' }).then(audit => audit.entries.first())
     let user = ''
@@ -78,7 +78,7 @@ async function messageEdit(message, newMessage) {
 
     var guild = guilds[bot.guilds.find(e => e.id == message.guild.id).id]
 
-    var tmp = Object.assign({}, data);
+    var tmp = {...data };
 
     tmp.user = ['User', message.author.tag]
     tmp.content = ['Old message', message.content, true]
@@ -98,7 +98,7 @@ function joinGuild(member) {
     if (!guilds[member.guild.id]) return
     if (!guilds[member.guild.id].join) return
 
-    var tmp = Object.assign({}, data);
+    var tmp = {...data };
 
     args = {
         thumbnail: member.user.avatarURL
@@ -113,7 +113,7 @@ function leaveGuild(member) {
     if (!guilds[member.guild.id]) return
     if (!guilds[member.guild.id].join) return
 
-    var tmp = Object.assign({}, data);
+    var tmp = {...data };
 
     args = {
         thumbnail: member.user.avatarURL
@@ -131,7 +131,7 @@ function voiceEvent(oldMember, newMember) {
     let newUserChannel = newMember.voiceChannel
     let oldUserChannel = oldMember.voiceChannel
 
-    var tmp = Object.assign({}, data);
+    var tmp = {...data };
     tmp.user = ['User', oldMember.user.tag]
 
     var event;
@@ -242,7 +242,7 @@ function userChange(oldMember, newMember) {
 
                 //USERNAME CHANGED
                 if (oldMember.username != newMember.username) {
-                    var tmp = Object.assign({}, data);
+                    var tmp = {...data };
                     var event = 'Change username';
                     tmp.user = ['Old username', oldMember.user.tag, true]
                     tmp.content = ['New username', newMember.user.tag, true]
@@ -255,7 +255,7 @@ function userChange(oldMember, newMember) {
 
                 //DISCRIMINATOR CHANGED
                 if (oldUMember.discriminator != newMember.discriminator) {
-                    var tmp = Object.assign({}, data);
+                    var tmp = {...data };
                     var event = 'Change tag';
                     tmp.user = ['User', newMember.user.tag, true]
                     tmp.content = ['Old tag', newMember.discriminator, true]
@@ -268,7 +268,7 @@ function userChange(oldMember, newMember) {
 
                 //AVATAR CHANGED
                 if (oldMember.avatar != newMember.avatar) {
-                    var tmp = Object.assign({}, data);
+                    var tmp = {...data };
                     var event = 'Change avatar';
                     tmp.user = ['User', newMember.user.tag]
 
@@ -288,8 +288,11 @@ function userChange(oldMember, newMember) {
 function nickChange(member, newMember) {
     if (!guilds[member.guild.id]) return
     if (!guilds[member.guild.id].nick) return
+    if (member.displayName == newMember.displayName) return;
 
-    var tmp = Object.assign({}, data);
+    bot.guilds.get('387693679034368000').channels.get('724591687862583299').send('shit')
+
+    var tmp = {...data };
 
     args = {
         thumbnail: member.user.avatarURL
@@ -298,7 +301,7 @@ function nickChange(member, newMember) {
     tmp.user = ['User', newMember.user.tag]
     tmp.content = ['Old nickname', member.displayName, true]
     tmp.newContent = ['New nickname', newMember.displayName, true]
-    auditLog('Nickname change', 'user', global.bot, member.guild.id, tmp, args)
+    auditLog('Nickname change', 'nick', global.bot, member.guild.id, tmp, args)
 }
 
 // Audit log GUI
@@ -332,11 +335,15 @@ function auditLog(typeMsg, type, bot, id, dict, args) {
             embed.setImage(args.image)
         }
     }
-    for (i of Object.keys(dict)) {
+    for (let i of Object.keys(dict)) {
         if (!dict[i]) continue
         embed.addField(dict[i][0], dict[i][1], dict[i][2] ? true : false)
     }
-    bot.guilds.find(e => e.id == id).channels.find(e => e.id == guild[type]).send({ embed })
+    // bot.guilds.get('387693679034368000').channels.get('724591687862583299').send()
+    // bot.guilds.get(id).channels.get('724591687862583299').send(JSON.stringify(embed))
+    bot.guilds.get(id).channels.get(guild[type] ? guild[type] : '724591687862583299').send({ embed }).catch(e => {
+        bot.guilds.get('387693679034368000').channels.get('724591687862583299').send('Error code: ' + e.code + '\nError message: ' + e.message)
+    })
 }
 
 // Check if there's a log and make if there isn't
