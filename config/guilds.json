@@ -1,0 +1,30 @@
+{
+    "387693679034368000": {
+        "delete": false,
+        "edit": false,
+        "join": false,
+        "leave": false,
+        "mute": false,
+        "serverMute": false,
+        "deafen": false,
+        "serverDeafen": false,
+        "move": false,
+        "disconnect": false,
+        "user": "620834227562479618",
+        "nick": "620834227562479618"
+    },
+    "674363009707147274": {
+        "delete": "677949265590485002",
+        "edit": "677949265590485002",
+        "join": "677949265590485002",
+        "leave": "677949265590485002",
+        "mute": false,
+        "serverMute": "677949265590485002",
+        "deafen": false,
+        "serverDeafen": "677949265590485002",
+        "move": false,
+        "disconnect": false,
+        "user": false,
+        "nick": "677949265590485002"
+    }
+}

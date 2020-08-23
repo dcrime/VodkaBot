@@ -1,0 +1,25 @@
+{
+  "name": "vodka",
+  "version": "0.0.1",
+  "description": "My bot",
+  "main": "bot.js",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "mathjs": "^6.6.0",
+    "moment": "^2.24.0",
+    "nodemon": "^2.0.2",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {},
+  "nodemonConfig": {
+    "ignore": [
+      "config/*"
+    ]
+  },
+  "scripts": {
+    "watch": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

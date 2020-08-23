@@ -1,0 +1,12 @@
+const Discord = module.require("discord.js");
+
+module.exports.run = async (bot, message, msg,  args) => {
+    //--------- Code ---------    
+}
+
+module.exports.loader = {
+    name: 'Command name',
+    folder: 'Folder name',
+    desc: 'Command description',
+    usage: 'usage **<text>**'
+}
