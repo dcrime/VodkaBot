@@ -23,7 +23,7 @@ try {
             cfg.token = param;
         }
         if (cfg.token === 'token') {
-            blockInput('No token provided in the config or the parimiters');
+            blockInput('No token provided in the config or the parimiters\nparam: ' + cfg.token + '\n params: ' + process.argv);
         }
     }
 } catch (e) {
@@ -68,10 +68,10 @@ bot.load = function() {
         });
 
     })
-    console.log('Done loading modules!')
 }
-bot.load()
-console.log(cfg.prefix)
+await bot.load()
+console.log('Done loading modules!')
+
 bot.on('ready', () => {
     console.log(`Bot ${bot.user.tag} (${bot.user.id}) started!`);
     bot.user.setActivity('myself', { type: 'watching' })
