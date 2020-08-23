@@ -69,7 +69,7 @@ bot.load = function() {
 
     })
 }
-await bot.load()
+bot.load()
 console.log('Done loading modules!')
 
 bot.on('ready', () => {
