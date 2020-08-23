@@ -41,5 +41,6 @@ build/Release
 node_modules/
 
 # My files
+*.log
 *.bat
 package-lock.json
