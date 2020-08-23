@@ -1,1 +1,1 @@
-nodemon bot.js
+node bot.js MzkxNjM0MjMwMDA4MDg2NTM5.WjVPzA.pjLkZpM_FxKrJTVK9w2rlCEA924

@@ -5,6 +5,31 @@ const listeners = require('./listeners')
 
 const cfg = require('./config.json');
 
+function blockInput(error) {
+    console.log('\n\n\n')
+    console.log(error)
+    console.log('')
+    console.log('Press any key to exit');
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', process.exit.bind(process, 0));
+
+}
+
+try {
+    if (cfg.token.split('.').length != 3) {
+        for (let param of process.argv) {
+            if (param.split('.').length != 3) continue;
+            cfg.token = param;
+        }
+        if (cfg.token === 'token') {
+            blockInput('No token provided in the config or the parimiters');
+        }
+    }
+} catch (e) {
+    console.log(e)
+}
+
 const bot = new Discord.Client({ disableEveryone: true })
 bot.functions = require('./functions')
 global.bot = bot
@@ -43,9 +68,10 @@ bot.load = function() {
         });
 
     })
+    console.log('Done loading modules!')
 }
 bot.load()
-
+console.log(cfg.prefix)
 bot.on('ready', () => {
     console.log(`Bot ${bot.user.tag} (${bot.user.id}) started!`);
     bot.user.setActivity('myself', { type: 'watching' })
@@ -90,11 +116,13 @@ bot.on("message", message => {
         //let cmd = bot.commands.get(command);
         let cmd = bot.commands.filter(e => e.help.name ? e.help.name.toLowerCase() == command.toLowerCase() : false)
         if (cmd) cmd.first().run(bot, message, msg, args);
-        console.log(`|\nUser: ${message.author.tag} (${message.author.id})\nPref ${cfg.prefix} \nCommand: ${command} \nArgs: ${args}\n|`);
+        console.log(`|\nUser: ${message.author.tag} (${message.author.id})\nPref ${cfg.prefix}\nCommand: ${command}\nArgs: ${args}\n|`);
     } catch (err) {
         console.log('|\n' + err + '\n|')
     }
 });
 
 
-bot.login(cfg.token);
+bot.login(cfg.token).catch(err => {
+    blockInput(err.message)
+});
