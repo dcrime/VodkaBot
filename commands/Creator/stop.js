@@ -4,7 +4,7 @@ module.exports.run = async (bot, message, msg, args) => {
     if(message.author.id !== '154322320045899785') return;
     
     bot.destroy()
-    //process.exit(1)
+    // process.exit(1)
 }
 
 module.exports.help = {

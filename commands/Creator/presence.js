@@ -2,10 +2,7 @@ const Discord = module.require("discord.js");
 
 module.exports.run = async (bot, message, msg, args) => {
     if(message.author.id !== '154322320045899785') return;
-    status = ''
-    for(i = 1; i < args.length; i++){
-        status += args[i] + ' '
-    }
+    let status = args.slice(1).join(' ')
     bot.user.setActivity(status, {type : args[0]})
 }
 

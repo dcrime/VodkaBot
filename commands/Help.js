@@ -10,7 +10,7 @@ module.exports.run = async(bot, message, msg, args) => {
     }
     mod = bot.modules.find(e => e.loader.name.toLowerCase() == args[0].toLowerCase())
     if (mod) {
-        cmds = bot.commands.filter(e => e.help.folder ? e.help.folder.toLowerCase() == mod.loader.name.toLowerCase() : false)
+        let cmds = bot.commands.filter(e => e.help.folder ? e.help.folder.toLowerCase() == mod.loader.name.toLowerCase() : false)
         const embed = new Discord.RichEmbed()
             .setAuthor(mod.loader.name)
             .setColor('#006600')
@@ -23,7 +23,7 @@ module.exports.run = async(bot, message, msg, args) => {
         }
         message.channel.send({ embed })
     } else {
-        cmds = bot.commands.find(e => e.help.name ? e.help.name.toLowerCase() == args[0].toLowerCase() : false)
+        let cmds = bot.commands.find(e => e.help.name ? e.help.name.toLowerCase() == args[0].toLowerCase() : false)
         var creator = true, show = true;
         if (cmds){
             creator = cmds.help.show == 'creator' ? message.author.id == '154322320045899785' ?  true : false : true 

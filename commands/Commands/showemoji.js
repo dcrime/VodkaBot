@@ -27,15 +27,15 @@ module.exports.run = async(bot, message, msg, args) => {
     if (!args[0]) {
         return message.channel.send('You must use at least one emoji')
     }
-    emojis = parseIDs(msg)
+    let emojis = parseIDs(msg)
     if (!emojis.length) {
         return message.channel.send('Is that an emoji?')
     }
-    emojiUrls = []
-    tmp = []
-    k = 0
-    j = 0
-    for (i of emojis) {
+    let emojiUrls = []
+    let tmp = []
+    let k = 0
+    let j = 0
+    for (let i of emojis) {
         if (k >= 10) {
             j++
             emojiUrls.push(tmp)
@@ -45,7 +45,7 @@ module.exports.run = async(bot, message, msg, args) => {
         k++
     }
     emojiUrls.push(tmp)
-    files = emojiUrls.map((file, index) => ({ files: file, name: `${index}.png` }));
+    let files = emojiUrls.map((file, index) => ({ files: file, name: `${index}.png` }));
     for (i of emojiUrls) {
         message.channel.send({ files: i })
     }
