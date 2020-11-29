@@ -44,3 +44,6 @@ node_modules/
 *.log
 *.bat
 package-lock.json
+config.json
+start.sh
+config.json

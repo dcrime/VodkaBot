@@ -26,5 +26,19 @@
         "disconnect": false,
         "user": false,
         "nick": "747217475388571778"
+    },
+    "770232718339604522": {
+        "delete": "781576675825287229",
+        "edit": "781576675825287229",
+        "join": "781053609412526140",
+        "leave": "781576675825287229",
+        "mute": false,
+        "serverMute": false,
+        "deafen": false,
+        "serverDeafen": false,
+        "move": false,
+        "disconnect": false,
+        "user": false,
+        "nick": "781576675825287229"
     }
 }

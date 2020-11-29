@@ -290,8 +290,6 @@ function nickChange(member, newMember) {
     if (!guilds[member.guild.id].nick) return
     if (member.displayName == newMember.displayName) return;
 
-    bot.guilds.get('387693679034368000').channels.get('724591687862583299').send('shit')
-
     var tmp = {...data };
 
     args = {
